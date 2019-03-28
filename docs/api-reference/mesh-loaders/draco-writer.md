@@ -15,18 +15,23 @@ Encodes a mesh or point cloud (maps of attributes) using [DRACO](https://google.
 ## Usage
 
 ```js
-import {DracoWriter} from `@loaders.gl/draco';
-import {writeFile} from '@loaders.gl/core';
+import {DracoWriter} from '@loaders.gl/draco';
+import {encodeFile} from '@loaders.gl/core';
 
-const data = await writeFile(url, DracoWriter, options);
+const data = await encodeFile(url, DracoWriter, options);
 ```
 
 ## Options
 
+- `pointcloud`=`false` (Boolean): Set to `true` to compress pointclouds (mode=`0` and no `indices`)/
 - `method`=`MESH_EDGEBREAKER_ENCODING` (String) - set Draco encoding method (applies to meshes only)
 - `speed`=`[5, 5]` ([Number, Number] - set Draco speed options.
-- `quantization`=`{POSITION: 10}` (Object) - set Draco attribute quantization.
+- `quantization`=`{POSITION: 10}` (Object) - set Draco attribute quantization. Lower numbers means higher compression but more information loss.
 - `log`= (Function) - callback for debug info.
+
+## Input Data
+
+Accepts a standardized mesh.
 
 ## Attribution/Credits
 

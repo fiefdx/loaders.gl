@@ -1,12 +1,19 @@
 import DRACOEncoder from './draco-encoder';
 
-function encodeDRACO(arrayBuffer, options) {
-  const dracoDecoder = new DRACOEncoder();
-  return dracoDecoder.encode(arrayBuffer, options);
+function encodeSync(data, options) {
+  const dracoEncoder = new DRACOEncoder();
+  dracoEncoder.setOptions(options);
+
+  return options.pointcloud
+    ? dracoEncoder.encodePointCloud(data, options)
+    : dracoEncoder.encodeMesh(data, options);
 }
 
 export default {
   name: 'DRACO',
   extension: 'drc',
-  encodeSync: encodeDRACO
+  encodeSync,
+  options: {
+    pointcloud: false // Set to true if pointcloud (mode: 0, no indices)
+  }
 };
